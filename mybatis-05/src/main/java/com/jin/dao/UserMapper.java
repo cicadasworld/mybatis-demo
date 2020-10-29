@@ -1,0 +1,29 @@
+package com.jin.dao;
+
+import com.jin.pojo.User;
+
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+
+import java.util.List;
+
+public interface UserMapper {
+
+    @Select("select * from user")
+    List<User> getUsers();
+
+    @Select("select * from user where id = #{id}")
+    User getUserById(@Param("id") int id);
+
+    @Insert("insert into user (id, name, pwd) values (#{id}, #{name}, #{pwd})")
+    void addUser(User user);
+
+    @Update("update user set name = #{name}, pwd = #{pwd} where id = #{id}")
+    void updateUser(User user);
+
+    @Delete("delete from user where id = #{id}")
+    void deleteUserById(@Param("id") int id);
+}
